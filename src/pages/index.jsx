@@ -2,14 +2,9 @@ import Image from 'next/future/image'
 import Head from 'next/head'
 import Link from 'next/link'
 
-
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
-import {
-  TwitterIcon,
-  GitHubIcon,
-  LinkedInIcon,
-} from '@/components/SocialIcons'
+import { TwitterIcon, GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
 import logoContentful from '@/images/logos/contentful.png'
 import logoElixir from '@/images/logos/elixir.webp'
 import logoFirstblood from '@/images/logos/firstblood.ico'
@@ -19,8 +14,6 @@ import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
 import { formatDate } from '@/lib/formatDate'
 import Newsletter from '@/components/Newsletter'
-
-
 
 function BriefcaseIcon(props) {
   return (
@@ -81,7 +74,6 @@ function SocialLink({ icon: Icon, ...props }) {
   )
 }
 
-
 function Resume() {
   let resume = [
     {
@@ -121,7 +113,7 @@ function Resume() {
       logo: logoBMind,
       start: '2017',
       end: '2020',
-    }
+    },
   ]
 
   return (
@@ -148,8 +140,9 @@ function Resume() {
               <dt className="sr-only">Date</dt>
               <dd
                 className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-                aria-label={`${role.start.label ?? role.start} until ${role.end.label ?? role.end
-                  }`}
+                aria-label={`${role.start.label ?? role.start} until ${
+                  role.end.label ?? role.end
+                }`}
               >
                 <time dateTime={role.start.dateTime ?? role.start}>
                   {role.start.label ?? role.start}
@@ -171,7 +164,6 @@ function Resume() {
   )
 }
 
-
 export default function Home({ articles }) {
   return (
     <>
@@ -192,10 +184,12 @@ export default function Home({ articles }) {
             Software developer and product builder
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            Hey! 👋 </p>
+            Hey! 👋{' '}
+          </p>
           <p className="mt-1 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Christian, a software developer and entrepreneur based in Ireland (TBD for how long).
-            I current work at Contenful trying to make developers life easier. Also love to hack on my own projects
+            I’m Christian, a software developer and entrepreneur based in
+            Ireland (TBD for how long). I current work at Contenful trying to
+            make developers life easier. Also love to hack on my own projects
             and build stuff.
           </p>
           <div className="mt-6 flex gap-6">
@@ -245,6 +239,6 @@ export async function getStaticProps() {
         .slice(0, 4)
         .map(({ component, ...meta }) => meta),
     },
-    revalidate: 3600
+    revalidate: 3600,
   }
 }

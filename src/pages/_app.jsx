@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
-import posthog from 'posthog-js'
 
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 
 import '@/styles/tailwind.css'
 import 'focus-visible'
+import usePosthog from '@/lib/usePosthog'
 
 function usePrevious(value) {
   let ref = useRef()
@@ -20,18 +20,22 @@ function usePrevious(value) {
 export default function App({ Component, pageProps, router }) {
   let previousPathname = usePrevious(router.pathname)
 
-  useEffect(() => {
-    posthog.init(process.env.POSTHOG_API_KEY, {
-      api_host: 'https://app.posthog.com',
-    })
+  const [posthog, posthogLoaded] = usePosthog()
 
-    const handleRouteChange = () => posthog.capture('$pageview')
+  useEffect(() => {
+    // Init for auto capturing
+    const handleRouteChange = () => {
+      if (typeof window !== 'undefined') {
+        posthog.capture('$pageview')
+      }
+    }
+
     router.events.on('routeChangeComplete', handleRouteChange)
 
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [router.events])
+  }, [router.events, posthog, posthogLoaded])
 
   return (
     <>
