@@ -42,24 +42,32 @@ export default function Uses() {
         <div className="space-y-20">
           <ToolsSection title="Workstation">
             <Tool title="16” MacBook Pro, M1 Pro, 32GB RAM (2022)">
-              My work laptop. It's a beast.
+              {`My work laptop. It's a beast.`}
             </Tool>
             <Tool title="13” MacBook Pro, i7, 32GB RAM (2020)">
-              My personal laptop. Probably will update to a M1 in the near future.
+              My personal laptop. Probably will update to a M1 in the near
+              future.
             </Tool>
             <Tool title="2k 27” Monitor">
-              I use a ViewSonic one because it fitted my needs at the time. It has USB-C charging which is cool. Will probably update to a better one.
+              I use a ViewSonic one because it fitted my needs at the time. It
+              has USB-C charging which is cool. Will probably update to a better
+              one.
             </Tool>
             <Tool title="Macbook Pro Keyboard and Trackpad">
-              Yeah, I use the laptop keyboard and trackpad. It fits well my setup and I find it really comfy.
+              Yeah, I use the laptop keyboard and trackpad. It fits well my
+              setup and I find it really comfy.
             </Tool>
           </ToolsSection>
           <ToolsSection title="Development tools">
             <Tool title="VS Code">
-              I have a bunch of extensions and at this point is the editor that makes me the fastest. I want to try Fleet and I sometimes use other stuff like nvim in the terminal or JetBrains stuff for specific Python stuff.
+              I have a bunch of extensions and at this point is the editor that
+              makes me the fastest. I want to try Fleet and I sometimes use
+              other stuff like nvim in the terminal or JetBrains stuff for
+              specific Python stuff.
             </Tool>
             <Tool title="iTerm2">
-              Not sure what brings vs the normal terminal but I like the minimal theme.
+              Not sure what brings vs the normal terminal but I like the minimal
+              theme.
             </Tool>
             <Tool title="TablePlus">
               Great software for working with databases. Has saved me from
@@ -69,18 +77,21 @@ export default function Uses() {
           </ToolsSection>
           <ToolsSection title="Thinking">
             <Tool title="Pen and paper">
-              Call me crazy but sometimes I just need to draw something real quick.
+              Call me crazy but sometimes I just need to draw something real
+              quick.
             </Tool>
           </ToolsSection>
           <ToolsSection title="Productivity">
             <Tool title="Raycast">
-              I like that it brings a clipboard history tool. The shortcuts are nice too.
+              I like that it brings a clipboard history tool. The shortcuts are
+              nice too.
             </Tool>
             <Tool title="Rectangle">
-              I know Raycast has this feature but I know the shortcuts and I'm used to it.
+              {`I know Raycast has this feature but I know the shortcuts and I'm used to it.`}
             </Tool>
             <Tool title="Cron">
-              I have a lot of emails so having my calendar on only one app is amazing.
+              I have a lot of emails so having my calendar on only one app is
+              amazing.
             </Tool>
             <Tool title="Mailstream">
               Same as Cron, having all mails in one place is really nice

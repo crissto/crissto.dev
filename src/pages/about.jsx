@@ -61,22 +61,23 @@ export default function About() {
           </div>
           <div className="lg:order-first lg:row-span-2">
             <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-              I'm Christian Stoyanov and I'm trying to solve problems while
-              having fun.
+              {
+                "I'm Christian Stoyanov and I'm trying to solve problems while having fun."
+              }
             </h1>
             <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
               <p>
-                Born and raised in Spain and now living in Ireland I'm a
+                {`Born and raised in Spain and now living in Ireland I'm a
                 developer trying to learn as much as possible while having fun.
                 I love solving problems and building products. Currently working
-                at the developer workflows team at Contenful.
+                at the developer workflows team at Contenful.`}
               </p>
               <p>
-                I started looking into programming while I was really into
+                {`I started looking into programming while I was really into
                 playing Minecraft. I was like 14 at the time and the bug to
                 create mods for it bit me. That got me into Java an even though
                 I didn't end up making anything cool I got my feet wet in the
-                coding world.
+                coding world.`}
               </p>
               <p>
                 I got into web development a couple of years later and got
@@ -85,14 +86,14 @@ export default function About() {
                 BMind, a marketing agency.
               </p>
               <p>
-                After that I've touched a bunch of languages and paradigms, from
+                {`After that I've touched a bunch of languages and paradigms, from
                 PHP (Laravel 😍) to Typescript (React and Node) passing by
                 things like Solidity (yeah, I passed that crypto phase. Not sure
                 if it's over tbh) and simulation engines for financials in
                 Python. I really support the idea of using the right tool for
                 the job so I don't enclose myself in a language. I'm proficient
                 in PHP, Python and TypeScript and if I have to learn another one
-                I wouldn't mind (Rust 🤔)
+                I wouldn't mind (Rust 🤔)`}
               </p>
             </div>
           </div>

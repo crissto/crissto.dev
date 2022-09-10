@@ -60,8 +60,9 @@ export default function ArticlesIndex({ articles }) {
         ) : (
           <div className="space-y-4">
             <p className="text-zinc-700 dark:text-zinc-500">
-              There is no articles published. Subscribe so you don't miss the
-              first.
+              {`
+                There is no articles published. Subscribe so you don't miss the first.
+              `}
             </p>
             <Newsletter />
           </div>
