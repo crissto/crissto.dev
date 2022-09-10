@@ -56,9 +56,16 @@ export default function Document() {
           property="og:description"
           content="Software developer and product builder"
         />
-        <meta property="og:image" content="https://crissto.dev/me.png" />
+        <meta
+          property="og:image"
+          itemProp="image"
+          content="https://crissto.dev/me.png"
+        />
         <meta property="og:site_name" content="crissto" />
+        <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content="@crissto39" />
+        <meta property="og:type" content="website" />
+        <meta property="og:updated_time" content="1440432930" />
       </Head>
       <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
         <Main />
