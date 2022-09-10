@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import posthog from 'posthog-js'
 import { Button } from './Button'
 
 function MailIcon(props) {
@@ -28,6 +29,7 @@ export default function Newsletter() {
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (event) => {
+    posthog.capture('newsletter-submitted')
     event.preventDefault()
 
     const form = event.target

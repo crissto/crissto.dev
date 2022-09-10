@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import posthog from 'posthog-js'
 
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
@@ -18,6 +19,19 @@ function usePrevious(value) {
 
 export default function App({ Component, pageProps, router }) {
   let previousPathname = usePrevious(router.pathname)
+
+  useEffect(() => {
+    posthog.init(process.env.POSTHOG_API_KEY, {
+      api_host: 'https://app.posthog.com',
+    })
+
+    const handleRouteChange = () => posthog.capture('$pageview')
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
     <>
