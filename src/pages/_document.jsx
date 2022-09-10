@@ -50,6 +50,13 @@ export default function Document() {
           type="application/feed+json"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/rss/feed.json`}
         />
+        <meta property="og:url" content="https://crissto.dev" />
+        <meta property="og:title" content="Christian Stoyanov's Site" />
+        <meta property="og:description" content="Software developer and product builder" />
+        <meta property="og:image" content="https://www.example.com/me.png" />
+        <meta property="og:site_name" content="crissto" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@crissto39" />
       </Head>
       <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
         <Main />
