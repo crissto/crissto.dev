@@ -1,22 +1,17 @@
 import posthog from 'posthog-js'
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 
 const usePosthog = () => {
-    const [posthogReady, setPosthogReady] = useState(false)
-    const [posthogClient, setPosthog] = useState(null)
+  return useMemo(() => {
+    if (typeof window === 'undefined') {
+      return null
+    }
 
-    useEffect(() => {
-        if (!posthogClient) {
-            posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY, {
-                api_host: process.env.NEXT_PUBLIC_POSTHOG_URL
-            })
-
-            setPosthogReady(true)
-            setPosthog(posthog)
-        }
-    }, [posthogClient])
-
-    return [posthogClient, posthogReady]
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_URL,
+    })
+    return posthog
+  }, [])
 }
 
 export default usePosthog

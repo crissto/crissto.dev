@@ -20,14 +20,16 @@ function usePrevious(value) {
 export default function App({ Component, pageProps, router }) {
   let previousPathname = usePrevious(router.pathname)
 
-  const [posthog, posthogLoaded] = usePosthog()
+  const posthog = usePosthog()
 
   useEffect(() => {
     // Init for auto capturing
     const handleRouteChange = () => {
-      if (typeof window !== 'undefined') {
+      if (posthog) {
         posthog.capture('$pageview')
       }
+
+      console.log(posthog)
     }
 
     router.events.on('routeChangeComplete', handleRouteChange)
@@ -35,7 +37,7 @@ export default function App({ Component, pageProps, router }) {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [router.events, posthog, posthogLoaded])
+  }, [router.events, posthog])
 
   return (
     <>
