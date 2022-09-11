@@ -28,8 +28,6 @@ export default function App({ Component, pageProps, router }) {
       if (posthog) {
         posthog.capture('$pageview')
       }
-
-      console.log(posthog)
     }
 
     router.events.on('routeChangeComplete', handleRouteChange)
