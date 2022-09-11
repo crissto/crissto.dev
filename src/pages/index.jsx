@@ -239,6 +239,5 @@ export async function getStaticProps() {
         .slice(0, 4)
         .map(({ component, ...meta }) => meta),
     },
-    revalidate: 3600,
   }
 }
