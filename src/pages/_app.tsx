@@ -54,3 +54,5 @@ export default function App({ Component, pageProps, router }) {
     </>
   )
 }
+
+export { reportWebVitals } from 'next-axiom'
