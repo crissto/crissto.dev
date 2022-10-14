@@ -1,14 +1,14 @@
+import '@/styles/tailwind.css'
+import 'focus-visible'
+
 import { useEffect, useRef } from 'react'
 
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
-
-import '@/styles/tailwind.css'
-import 'focus-visible'
 import usePosthog from '@/lib/usePosthog'
 
-function usePrevious(value) {
-  let ref = useRef()
+function usePrevious(value: string) {
+  let ref = useRef<string>(null)
 
   useEffect(() => {
     ref.current = value

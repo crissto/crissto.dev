@@ -1,21 +1,22 @@
 import Image from 'next/future/image'
 import Head from 'next/head'
 import Link from 'next/link'
+import type { SVGProps } from 'react'
 
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
-import { TwitterIcon, GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
+import Newsletter from '@/components/Newsletter'
+import { GitHubIcon, LinkedInIcon, TwitterIcon } from '@/components/SocialIcons'
+import logoBMind from '@/images/logos/bmind.webp'
 import logoContentful from '@/images/logos/contentful.png'
 import logoElixir from '@/images/logos/elixir.webp'
 import logoFirstblood from '@/images/logos/firstblood.ico'
 import logoSupersolid from '@/images/logos/supersolid.png'
-import logoBMind from '@/images/logos/bmind.webp'
+import { formatDate } from '@/lib/formatDate'
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
-import { formatDate } from '@/lib/formatDate'
-import Newsletter from '@/components/Newsletter'
 
-function BriefcaseIcon(props) {
+function BriefcaseIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -38,19 +39,6 @@ function BriefcaseIcon(props) {
   )
 }
 
-function ArrowDownIcon(props) {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
 function Article({ article }) {
   return (
     <Card as="article">
@@ -66,7 +54,12 @@ function Article({ article }) {
   )
 }
 
-function SocialLink({ icon: Icon, ...props }) {
+type SocialLinkProps = {
+  icon?: any
+  href: string
+}
+
+function SocialLink({ icon: Icon, ...props }: SocialLinkProps) {
   return (
     <Link className="group -m-1 p-1" {...props}>
       <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
@@ -90,22 +83,20 @@ function Resume() {
       company: 'Elixir Games',
       title: 'Senior Developer',
       logo: logoElixir,
-      start: 'Jan 2022',
+      start: '2022',
       end: 'Sept 2022',
     },
     {
       company: 'Firstblood',
       title: 'Backend Engineer',
       logo: logoFirstblood,
-      start: 'March 2021',
-      end: 'Dec 2021',
+      year: '2021',
     },
     {
       company: 'Supersolid',
       title: 'Server Developer',
       logo: logoSupersolid,
-      start: '2020',
-      end: '2021',
+      year: '2020',
     },
     {
       company: 'BMind',
@@ -138,20 +129,33 @@ function Resume() {
                 {role.title}
               </dd>
               <dt className="sr-only">Date</dt>
-              <dd
-                className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-                aria-label={`${role.start.label ?? role.start} until ${
-                  role.end.label ?? role.end
-                }`}
-              >
-                <time dateTime={role.start.dateTime ?? role.start}>
-                  {role.start.label ?? role.start}
-                </time>{' '}
-                <span aria-hidden="true">—</span>{' '}
-                <time dateTime={role.end.dateTime ?? role.end}>
-                  {role.end.label ?? role.end}
-                </time>
-              </dd>
+              {role.year ? (
+                <dd
+                  className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+                  aria-label={role.year}
+                >
+                  <time dateTime={role.year}>{role.year}</time>
+                </dd>
+              ) : (
+                <dd
+                  className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+                  aria-label={`${role.start} until ${
+                    typeof role.end != 'string' ? role.end.label : role.end
+                  }`}
+                >
+                  <time dateTime={role.start}>{role.start}</time>{' '}
+                  <span aria-hidden="true">—</span>{' '}
+                  <time
+                    dateTime={
+                      typeof role.end != 'string'
+                        ? role.end.dateTime.toString()
+                        : role.end
+                    }
+                  >
+                    {typeof role.end != 'string' ? role.end.label : role.end}
+                  </time>
+                </dd>
+              )}
             </dl>
           </li>
         ))}
@@ -179,7 +183,7 @@ export default function Home({ articles }) {
         />
       </Head>
       <Container className="mt-9">
-        <div className="max-w-2xl">
+        <div className="max-w-4xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
             Software developer and product builder
           </h1>

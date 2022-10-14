@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import { getAllArticles } from '@/lib/getAllArticles'
+import { Article, getAllArticles } from '@/lib/getAllArticles'
 import { formatDate } from '@/lib/formatDate'
 import Newsletter from '@/components/Newsletter'
 
@@ -35,7 +35,11 @@ function Article({ article }) {
   )
 }
 
-export default function ArticlesIndex({ articles }) {
+export default function ArticlesIndex({
+  articles,
+}: {
+  articles: Omit<Article, 'component'>[]
+}) {
   return (
     <>
       <Head>
@@ -73,9 +77,11 @@ export default function ArticlesIndex({ articles }) {
 }
 
 export async function getStaticProps() {
+  const articles = await getAllArticles()
+
   return {
     props: {
-      articles: (await getAllArticles()).map(({ component, ...meta }) => meta),
+      articles: articles.map(({ component, ...meta }) => meta),
     },
   }
 }

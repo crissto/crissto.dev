@@ -1,5 +1,6 @@
 import glob from 'fast-glob'
 import * as path from 'path'
+
 import { getAllArticles } from '@/lib/getAllArticles'
 
 const Sitemap = () => {
@@ -8,7 +9,7 @@ const Sitemap = () => {
 
 export const getServerSideProps = async ({ res }) => {
   const BASE_URL = 'https://crissto.dev'
-  let filenames = await glob(['*.jsx'], {
+  let filenames = await glob(['*.tsx'], {
     cwd: path.join(process.cwd(), 'src/pages'),
   })
 
@@ -16,14 +17,14 @@ export const getServerSideProps = async ({ res }) => {
     .filter((staticPage) => {
       return ![
         'api',
-        '_app.jsx',
-        '_document.jsx',
-        '404.js',
-        'sitemap.xml.js',
+        '_app.tsx',
+        '_document.tsx',
+        '404.ts',
+        'sitemap.xml.ts',
       ].includes(staticPage)
     })
     .map(
-      (staticPagePath) => `${BASE_URL}/${staticPagePath.replace(/\.jsx$/, '')}`
+      (staticPagePath) => `${BASE_URL}/${staticPagePath.replace(/\.tsx$/, '')}`
     )
 
   const articles = (await getAllArticles()).map(
@@ -36,7 +37,7 @@ export const getServerSideProps = async ({ res }) => {
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       ${allPaths
         .map((url) => {
-          return `
+          return `  
             <url>
               <loc>${url}</loc>
               <lastmod>${new Date().toISOString()}</lastmod>

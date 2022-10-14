@@ -1,7 +1,14 @@
-import { forwardRef } from 'react'
+import { forwardRef, ForwardRefExoticComponent, HTMLProps } from 'react'
 import clsx from 'clsx'
 
-const OuterContainer = forwardRef(function OuterContainer(
+type DivProps = HTMLProps<HTMLDivElement>
+
+type ContainerType = ForwardRefExoticComponent<DivProps> & {
+  Outer: typeof OuterContainer,
+  Inner: typeof InnerContainer
+}
+
+const OuterContainer = forwardRef<HTMLDivElement, DivProps>(function OuterContainer(
   { className, children, ...props },
   ref
 ) {
@@ -12,7 +19,7 @@ const OuterContainer = forwardRef(function OuterContainer(
   )
 })
 
-const InnerContainer = forwardRef(function InnerContainer(
+const InnerContainer = forwardRef<HTMLDivElement, DivProps>(function InnerContainer(
   { className, children, ...props },
   ref
 ) {
@@ -27,16 +34,16 @@ const InnerContainer = forwardRef(function InnerContainer(
   )
 })
 
-export const Container = forwardRef(function Container(
+export const Container = forwardRef<HTMLDivElement, DivProps>(function Container(
   { children, ...props },
   ref
 ) {
   return (
-    <OuterContainer ref={ref} {...props}>
+    <OuterContainer ref={ref as any} {...props}>
       <InnerContainer>{children}</InnerContainer>
     </OuterContainer>
   )
-})
+}) as ContainerType
 
 Container.Outer = OuterContainer
 Container.Inner = InnerContainer

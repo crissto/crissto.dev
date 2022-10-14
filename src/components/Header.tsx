@@ -6,9 +6,16 @@ import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import avatarImage from '@/images/avatar.webp'
-import { Fragment, useEffect, useRef } from 'react'
+import {
+  Fragment,
+  type SVGProps,
+  useEffect,
+  useRef,
+  ReactNode,
+  CSSProperties,
+} from 'react'
 
-function CloseIcon(props) {
+function CloseIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
@@ -23,7 +30,7 @@ function CloseIcon(props) {
   )
 }
 
-function ChevronDownIcon(props) {
+function ChevronDownIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 8 6" aria-hidden="true" {...props}>
       <path
@@ -37,7 +44,7 @@ function ChevronDownIcon(props) {
   )
 }
 
-function SunIcon(props) {
+function SunIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -56,7 +63,7 @@ function SunIcon(props) {
   )
 }
 
-function MoonIcon(props) {
+function MoonIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
@@ -212,19 +219,32 @@ function clamp(number, a, b) {
   return Math.min(Math.max(number, min), max)
 }
 
-function AvatarContainer({ className, ...props }) {
+type AvatarContainerProps = {
+  className?: string
+  children?: ReactNode
+  style?: Record<string, unknown>
+}
+
+function AvatarContainer({ className, ...props }: AvatarContainerProps) {
   return (
     <div
       className={clsx(
         className,
-        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10'
+        'h-14 w-14 overflow-hidden rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10'
       )}
       {...props}
     />
   )
 }
 
-function Avatar({ large = true, className, ...props }) {
+type AvatarProps = {
+  large?: boolean
+  className?: string
+  children?: ReactNode
+  style?: Record<string, unknown>
+}
+
+function Avatar({ large = true, className, ...props }: AvatarProps) {
   return (
     <Link
       href="/"
@@ -248,19 +268,19 @@ function Avatar({ large = true, className, ...props }) {
 export function Header() {
   let isHomePage = useRouter().pathname === '/'
 
-  let headerRef = useRef()
-  let avatarRef = useRef()
+  let headerRef = useRef<HTMLDivElement>(null)
+  let avatarRef = useRef<HTMLDivElement>(null)
   let isInitial = useRef(true)
 
   useEffect(() => {
     let downDelay = avatarRef.current?.offsetTop ?? 0
     let upDelay = 64
 
-    function setProperty(property, value) {
+    function setProperty(property: string, value: string) {
       document.documentElement.style.setProperty(property, value)
     }
 
-    function removeProperty(property) {
+    function removeProperty(property: string) {
       document.documentElement.style.removeProperty(property)
     }
 
@@ -329,7 +349,7 @@ export function Header() {
       let borderTransform = `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`
 
       setProperty('--avatar-border-transform', borderTransform)
-      setProperty('--avatar-border-opacity', scale === toScale ? 1 : 0)
+      setProperty('--avatar-border-opacity', scale === toScale ? '1' : '0')
     }
 
     function updateStyles() {
@@ -343,7 +363,9 @@ export function Header() {
     window.addEventListener('resize', updateStyles)
 
     return () => {
-      window.removeEventListener('scroll', updateStyles, { passive: true })
+      window.removeEventListener('scroll', updateStyles, {
+        passive: true,
+      } as EventListenerOptions)
       window.removeEventListener('resize', updateStyles)
     }
   }, [isHomePage])
@@ -365,11 +387,11 @@ export function Header() {
             />
             <Container
               className="top-0 order-last -mb-3 pt-3"
-              style={{ position: 'var(--header-position)' }}
+              style={{ position: 'var(--header-position)' as any }}
             >
               <div
                 className="top-[var(--avatar-top,theme(spacing.3))] w-full"
-                style={{ position: 'var(--header-inner-position)' }}
+                style={{ position: 'var(--header-inner-position)' as any }}
               >
                 <div className="relative">
                   <AvatarContainer
@@ -392,11 +414,11 @@ export function Header() {
         <div
           ref={headerRef}
           className="top-0 z-10 h-16 pt-6"
-          style={{ position: 'var(--header-position)' }}
+          style={{ position: 'var(--header-position)' as any }}
         >
           <Container
             className="top-[var(--header-top,theme(spacing.6))] w-full"
-            style={{ position: 'var(--header-inner-position)' }}
+            style={{ position: 'var(--header-inner-position)' as any }}
           >
             <div className="relative flex gap-4">
               <div className="flex flex-1">

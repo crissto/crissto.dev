@@ -1,7 +1,17 @@
 import glob from 'fast-glob'
 import * as path from 'path'
 
-async function importArticle(articleFilename) {
+export type Article = {
+  slug: string,
+  component: any,
+  author: string,
+  date: string,
+  title: string,
+  description: string,
+  published: boolean,
+}
+
+async function importArticle(articleFilename: string): Promise<Article> {
   let { meta, default: component } = await import(
     `../pages/articles/${articleFilename}`
   )
@@ -19,5 +29,6 @@ export async function getAllArticles() {
 
   let articles = await Promise.all(articleFilenames.map(importArticle))
   let publishedArticles = articles.filter((article) => article.published)
-  return publishedArticles.sort((a, z) => new Date(z.date) - new Date(a.date))
+  
+  return publishedArticles.sort((a, z) => new Date(z.date).getMilliseconds() - new Date(a.date).getMilliseconds())
 }

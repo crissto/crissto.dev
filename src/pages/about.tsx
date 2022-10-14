@@ -1,18 +1,26 @@
+import clsx from 'clsx'
 import Image from 'next/future/image'
 import Head from 'next/head'
 import Link from 'next/link'
-import clsx from 'clsx'
+import { type ReactNode } from 'react'
 
 import { Container } from '@/components/Container'
-import {
-  TwitterIcon,
-  InstagramIcon,
-  GitHubIcon,
-  LinkedInIcon,
-} from '@/components/SocialIcons'
+import { GitHubIcon, LinkedInIcon, TwitterIcon } from '@/components/SocialIcons'
 import portraitImage from '@/images/full_body_me.webp'
 
-function SocialLink({ className, href, children, icon: Icon }) {
+type SocialLinkProps = {
+  className?: string
+  href?: string
+  children?: ReactNode
+  icon?: any
+}
+
+function SocialLink({
+  className,
+  href,
+  children,
+  icon: Icon,
+}: SocialLinkProps) {
   return (
     <li className={clsx(className, 'flex')}>
       <Link

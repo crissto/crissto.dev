@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { type SVGProps, useState, type FormEvent } from 'react'
 import posthog from 'posthog-js'
 import { Button } from './Button'
 
-function MailIcon(props) {
+function MailIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -25,14 +25,23 @@ function MailIcon(props) {
   )
 }
 
+interface FormElements extends HTMLFormControlsCollection {
+  email: HTMLInputElement
+  check: HTMLInputElement
+}
+
+interface NewsletterFormElement extends HTMLFormElement {
+  readonly elements: FormElements
+}
+
 export default function Newsletter() {
   const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<NewsletterFormElement>) => {
     posthog.capture('newsletter-submitted')
     event.preventDefault()
 
-    const form = event.target
+    const form = event.currentTarget
     const email = form.elements.email.value
     const checkbox = Boolean(form.elements.check.value)
     if (!email || !checkbox) {
