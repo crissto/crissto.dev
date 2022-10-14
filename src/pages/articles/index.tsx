@@ -1,10 +1,10 @@
 import Head from 'next/head'
 
 import { Card } from '@/components/Card'
-import { SimpleLayout } from '@/components/SimpleLayout'
-import { Article, getAllArticles } from '@/lib/getAllArticles'
-import { formatDate } from '@/lib/formatDate'
 import Newsletter from '@/components/Newsletter'
+import { SimpleLayout } from '@/components/SimpleLayout'
+import { formatDate } from '@/lib/formatDate'
+import { Article, getAllArticles } from '@/lib/getAllArticles'
 
 function Article({ article }) {
   return (

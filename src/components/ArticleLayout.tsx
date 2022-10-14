@@ -1,10 +1,10 @@
-import type { SVGProps } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import type { SVGProps } from 'react'
 
 import { Container } from '@/components/Container'
-import { formatDate } from '@/lib/formatDate'
 import { Prose } from '@/components/Prose'
+import { formatDate } from '@/lib/formatDate'
 
 function ArrowLeftIcon(props: SVGProps<SVGSVGElement>) {
   return (

@@ -1,5 +1,6 @@
-import { type SVGProps, useState, type FormEvent } from 'react'
 import posthog from 'posthog-js'
+import { type FormEvent,type SVGProps, useState } from 'react'
+
 import { Button } from './Button'
 
 function MailIcon(props: SVGProps<SVGSVGElement>) {
