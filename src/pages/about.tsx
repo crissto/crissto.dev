@@ -25,6 +25,8 @@ function SocialLink({
     <li className={clsx(className, 'flex')}>
       <Link
         href={href}
+        target="_blank"
+        rel="noreferrer"
         className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
       >
         <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
@@ -107,22 +109,29 @@ export default function About() {
           </div>
           <div className="lg:pl-20">
             <ul role="list">
-              <SocialLink href="#" icon={TwitterIcon}>
-                Follow on Twitter
-              </SocialLink>
-              <SocialLink href="#" icon={GitHubIcon} className="mt-4">
-                Follow on GitHub
-              </SocialLink>
-              <SocialLink href="#" icon={LinkedInIcon} className="mt-4">
-                Follow on LinkedIn
-              </SocialLink>
-              <SocialLink
-                href="mailto:me@crissto.dev"
-                icon={MailIcon}
-                className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
-              >
-                me@crissto.dev
-              </SocialLink>
+              <div className="flex justify-center">
+                <SocialLink
+                  href="https://twitter.com/crissto39"
+                  icon={TwitterIcon}
+                />
+                <SocialLink
+                  href="https://www.github.com/crissto"
+                  icon={GitHubIcon}
+                />
+                <SocialLink
+                  href="https://www.linkedin.com/in/christian-stoyanov/"
+                  icon={LinkedInIcon}
+                />
+              </div>
+              <div className="flex justify-center">
+                <SocialLink
+                  href="mailto:me@crissto.dev"
+                  icon={MailIcon}
+                  className="mt-8 flex flex-col border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
+                >
+                  me@crissto.dev
+                </SocialLink>
+              </div>
             </ul>
           </div>
         </div>

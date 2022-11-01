@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import Image from 'next/future/image'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -5,6 +6,7 @@ import type { SVGProps } from 'react'
 
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
+import { Avatar } from '@/components/Header'
 import Newsletter from '@/components/Newsletter'
 import { GitHubIcon, LinkedInIcon, TwitterIcon } from '@/components/SocialIcons'
 import logoBMind from '@/images/logos/bmind.webp'
@@ -14,7 +16,7 @@ import logoFirstblood from '@/images/logos/firstblood.ico'
 import logoSupersolid from '@/images/logos/supersolid.png'
 import { formatDate } from '@/lib/formatDate'
 import { generateRssFeed } from '@/lib/generateRssFeed'
-import { getAllArticles } from '@/lib/getAllArticles'
+import { Article, getAllArticles } from '@/lib/getAllArticles'
 
 function BriefcaseIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -117,7 +119,13 @@ function Resume() {
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
             <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <Image src={role.logo} alt="" className="h-7 w-7" />
+              <Image
+                src={role.logo}
+                alt=""
+                className={clsx('h-8 w-8', {
+                  'rounded-full bg-white': role.logo === logoBMind,
+                })}
+              />
             </div>
             <dl className="flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">Company</dt>
@@ -168,7 +176,7 @@ function Resume() {
   )
 }
 
-export default function Home({ articles }) {
+export default function Home({ articles }: { articles: Article[] }) {
   return (
     <>
       <Head>
@@ -183,51 +191,66 @@ export default function Home({ articles }) {
         />
       </Head>
       <Container className="mt-9">
-        <div className="max-w-4xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Software developer and product builder
-          </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            Hey! 👋{' '}
-          </p>
-          <p className="mt-1 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Christian, a software developer and entrepreneur based in
-            Ireland (TBD for how long). I current work at Contenful trying to
-            make developers life easier. Also love to hack on my own projects
-            and build stuff.
-          </p>
-          <div className="mt-6 flex gap-6">
-            <SocialLink
-              href="https://twitter.com/crissto39"
-              aria-label="Follow on Twitter"
-              icon={TwitterIcon}
-            />
-            <SocialLink
-              href="https://github.com/crissto"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
-            <SocialLink
-              href="https://www.linkedin.com/in/christian-stoyanov/"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
-            />
+        <div className="max-w-6xl">
+          <div className="flex space-x-6 align-middle">
+            <div className="flex flex-col justify-center">
+              <Avatar large className="block h-32 w-32 origin-left" />
+            </div>
+            <div>
+              <h1 className="max-w-lg text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+                Software developer and product builder
+              </h1>
+            </div>
+          </div>
+          <div className="grid grid-cols-5 space-x-8">
+            <div className="col-span-3">
+              <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+                Hey! 👋{' '}
+              </p>
+              <p className="mt-1 text-base text-zinc-600 dark:text-zinc-400">
+                I’m Christian, a software developer and entrepreneur based in
+                Ireland (TBD for how long). I current work at Contenful trying
+                to make developers life easier. Also love to hack on my own
+                projects and build stuff.
+              </p>
+              <div className="mt-6 flex gap-6">
+                <SocialLink
+                  href="https://twitter.com/crissto39"
+                  aria-label="Follow on Twitter"
+                  icon={TwitterIcon}
+                />
+                <SocialLink
+                  href="https://github.com/crissto"
+                  aria-label="Follow on GitHub"
+                  icon={GitHubIcon}
+                />
+                <SocialLink
+                  href="https://www.linkedin.com/in/christian-stoyanov/"
+                  aria-label="Follow on LinkedIn"
+                  icon={LinkedInIcon}
+                />
+              </div>
+            </div>
+            <div className="col-span-2">
+              <Resume />
+            </div>
           </div>
         </div>
       </Container>
-      <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
+      {articles.length > 0 && (
+        <Container className="mt-24 md:mt-28">
+          <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+            <div className="flex flex-col gap-16">
+              {articles.map((article) => (
+                <Article key={article.slug} article={article} />
+              ))}
+            </div>
+            <div className="space-y-10 lg:pl-16 xl:pl-24">
+              <Newsletter />
+            </div>
           </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
-            <Resume />
-          </div>
-        </div>
-      </Container>
+        </Container>
+      )}
     </>
   )
 }
