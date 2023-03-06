@@ -1,12 +1,3 @@
 {
-  "extends": ["next/core-web-vitals"],
-  "plugins": ["simple-import-sort", "import"],
-  "rules": {
-    // increase the severity of rules so they are auto-fixable
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
-    "import/first": "error",
-    "import/newline-after-import": "error",
-    "import/no-duplicates": "error"
-  }
+  "extends": ["next/core-web-vitals"]
 }

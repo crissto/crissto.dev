@@ -1,11 +1,12 @@
 import '@/styles/tailwind.css'
+import { Analytics } from '@vercel/analytics/react'
 import 'focus-visible'
-
 import { useEffect, useRef } from 'react'
+
+import usePosthog from '@/lib/usePosthog'
 
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
-import usePosthog from '@/lib/usePosthog'
 
 function usePrevious(value: string) {
   let ref = useRef<string>(null)
@@ -50,6 +51,7 @@ export default function App({ Component, pageProps, router }) {
           <Component previousPathname={previousPathname} {...pageProps} />
         </main>
         <Footer />
+        <Analytics />
       </div>
     </>
   )

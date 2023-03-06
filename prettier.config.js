@@ -2,10 +2,10 @@ module.exports = {
   singleQuote: true,
   semi: false,
   importOrder: [
+    '^[./]',
     '^@/lib/(.*)$',
     '^@/images/(.*)$',
     '^@/components/(.*)$',
-    '^[./]',
   ],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
