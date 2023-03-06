@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { type ReactNode } from 'react'
+import { type ReactNode, SVGProps } from 'react'
 
 import portraitImage from '@/images/full_body_me.webp'
 
@@ -37,7 +37,7 @@ function SocialLink({
   )
 }
 
-function MailIcon(props) {
+function MailIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
