@@ -1,19 +1,19 @@
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
-import Image from 'next/future/image'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import {
-  type SVGProps,
-  CSSProperties,
   Fragment,
-  ReactNode,
+  type ReactNode,
+  type SVGProps,
   useEffect,
   useRef,
 } from 'react'
 
-import { Container } from '@/components/Container'
 import avatarImage from '@/images/avatar.webp'
+
+import { Container } from '@/components/Container'
 
 function CloseIcon(props: SVGProps<SVGSVGElement>) {
   return (
