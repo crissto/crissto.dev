@@ -1,17 +1,15 @@
-import clsx from "clsx";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import type { ReactNode, SVGProps } from "react";
-
-import portraitImage from "@/images/full_body_me.webp";
-
 import { Container } from "@/components/Container";
 import {
   GitHubIcon,
   LinkedInIcon,
   TwitterIcon,
 } from "@/components/SocialIcons";
+import portraitImage from "@/images/full_body_me.webp";
+import clsx from "clsx";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import type { ReactNode, SVGProps } from "react";
 
 type SocialLinkProps = {
   className?: string;
@@ -51,57 +49,53 @@ function MailIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
+export const metadata: Metadata = {
+  title: "About - Christian Stoyanov",
+  description:
+    "I'm Christian Stoyanov. I'm trying to solve problems while having fun",
+};
 export default function About() {
   return (
-    <>
-      <Head>
-        <title>About - Christian Stoyanov</title>
-        <meta
-          name="description"
-          content="I'm Christian Stoyanov. I'm trying to solve problems while having fun"
-        />
-      </Head>
-      <Container className="mt-16 sm:mt-32">
-        <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
-          <div className="lg:pl-20">
-            <div className="max-w-xs px-2.5 lg:max-w-none">
-              <Image
-                src={portraitImage}
-                alt=""
-                sizes="(min-width: 1024px) 32rem, 20rem"
-                className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
-              />
-            </div>
+    <Container className="mt-16 sm:mt-32">
+      <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
+        <div className="lg:pl-20">
+          <div className="max-w-xs px-2.5 lg:max-w-none">
+            <Image
+              src={portraitImage}
+              alt=""
+              sizes="(min-width: 1024px) 32rem, 20rem"
+              className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+            />
           </div>
-          <div className="lg:order-first lg:row-span-2">
-            <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-              {
-                "I'm Christian Stoyanov and I'm trying to solve problems while having fun."
-              }
-            </h1>
-            <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-              <p>
-                {`Born and raised in Spain and now living in Ireland I'm a
+        </div>
+        <div className="lg:order-first lg:row-span-2">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+            {
+              "I'm Christian Stoyanov and I'm trying to solve problems while having fun."
+            }
+          </h1>
+          <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+            <p>
+              {`Born and raised in Spain and now living in Ireland I'm a
                 developer trying to learn as much as possible while having fun.
                 I love solving problems and building products. Currently working
                 at the developer workflows team at Contenful.`}
-              </p>
-              <p>
-                {`I started looking into programming while I was really into
+            </p>
+            <p>
+              {`I started looking into programming while I was really into
                 playing Minecraft. I was like 14 at the time and the bug to
                 create mods for it bit me. That got me into Java an even though
                 I didn't end up making anything cool I got my feet wet in the
                 coding world.`}
-              </p>
-              <p>
-                I got into web development a couple of years later and got
-                started with Python. Made some money making webs for friends and
-                family and when I was 19 got a job as a Junior Developer at
-                BMind, a marketing agency.
-              </p>
-              <p>
-                {`After that I've touched a bunch of languages and paradigms, from
+            </p>
+            <p>
+              I got into web development a couple of years later and got started
+              with Python. Made some money making webs for friends and family
+              and when I was 19 got a job as a Junior Developer at BMind, a
+              marketing agency.
+            </p>
+            <p>
+              {`After that I've touched a bunch of languages and paradigms, from
                 PHP (Laravel 😍) to Typescript (React and Node) passing by
                 things like Solidity (yeah, I passed that crypto phase. Not sure
                 if it's over tbh) and simulation engines for financials in
@@ -109,38 +103,37 @@ export default function About() {
                 the job so I don't enclose myself in a language. I'm proficient
                 in PHP, Python and TypeScript and if I have to learn another one
                 I wouldn't mind (Rust 🤔)`}
-              </p>
-            </div>
-          </div>
-          <div className="lg:pl-20">
-            <ul className="space-y-16">
-              <div className="flex justify-center">
-                <SocialLink
-                  href="https://twitter.com/crissto39"
-                  icon={TwitterIcon}
-                />
-                <SocialLink
-                  href="https://www.github.com/crissto"
-                  icon={GitHubIcon}
-                />
-                <SocialLink
-                  href="https://www.linkedin.com/in/christian-stoyanov/"
-                  icon={LinkedInIcon}
-                />
-              </div>
-              <div className="flex justify-center">
-                <SocialLink
-                  href="mailto:me@crissto.dev"
-                  icon={MailIcon}
-                  className="mt-8 flex flex-col border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
-                >
-                  me@crissto.dev
-                </SocialLink>
-              </div>
-            </ul>
+            </p>
           </div>
         </div>
-      </Container>
-    </>
+        <div className="lg:pl-20">
+          <ul className="space-y-16">
+            <div className="flex justify-center">
+              <SocialLink
+                href="https://twitter.com/crissto39"
+                icon={TwitterIcon}
+              />
+              <SocialLink
+                href="https://www.github.com/crissto"
+                icon={GitHubIcon}
+              />
+              <SocialLink
+                href="https://www.linkedin.com/in/christian-stoyanov/"
+                icon={LinkedInIcon}
+              />
+            </div>
+            <div className="flex justify-center">
+              <SocialLink
+                href="mailto:me@crissto.dev"
+                icon={MailIcon}
+                className="mt-8 flex flex-col border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
+              >
+                me@crissto.dev
+              </SocialLink>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </Container>
   );
 }

@@ -1,20 +1,17 @@
-import Head from "next/head";
-import Link from "next/link";
-
 import { Card } from "@/components/Card";
 import { Container } from "@/components/Container";
 import { Avatar } from "@/components/Header";
 import Newsletter from "@/components/Newsletter";
+import Resume from "@/components/Resume";
 import {
   GitHubIcon,
   LinkedInIcon,
   TwitterIcon,
 } from "@/components/SocialIcons";
-
-import Resume from "@/components/Resume";
 import { formatDate } from "@/lib/formatDate";
-import { generateRssFeed } from "@/lib/generateRssFeed";
 import { getAllArticles } from "@/lib/getAllArticles";
+import type { Metadata } from "next";
+import Link from "next/link";
 
 function Article({ article }) {
   return (
@@ -44,28 +41,18 @@ function SocialLink({ icon: Icon, ...props }: SocialLinkProps) {
   );
 }
 
-export default async function Home() {
-  if (process.env.NODE_ENV === "production") {
-    await generateRssFeed();
-  }
+export const metadata: Metadata = {
+  title: "Home - Christian Stoyanov",
+  description: "Software developer and product builder",
+};
 
+export default async function Home() {
   const articles = (await getAllArticles())
     .slice(0, 4)
     .map(({ component, ...meta }) => meta);
 
   return (
     <>
-      <Head>
-        <title>
-          Christian Stoyanov - Software developer and product builder
-        </title>
-        <meta
-          name="description"
-          content="I’m Christian, a software developer and entrepreneur based in Ireland (TBD for how long).
-          I current work at Contenful trying to make developers life easier. Also love to hack on my own projects
-          and build stuff."
-        />
-      </Head>
       <Container className="mt-9">
         <div className="max-w-6xl">
           <div className="flex space-x-6 align-middle">

@@ -3,11 +3,13 @@ import { Header } from "@/components/Header";
 import { PostHogPageView } from "@/components/PostHogPageView";
 import "@/styles/tailwind.css";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "focus-visible";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ViewTransitions } from "next-view-transitions";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -58,8 +60,12 @@ export const metadata: Metadata = {
   },
   robots: "index, follow",
   metadataBase: new URL("https://crissto.dev"),
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#ffffff",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -74,7 +80,10 @@ export default function RootLayout({
         <body
           className={`flex h-full flex-col bg-zinc-50 dark:bg-black ${inter.className}`}
         >
-          <PostHogPageView />
+          <Suspense fallback={null}>
+            <PostHogPageView />
+          </Suspense>
+          <SpeedInsights />
           <div className="fixed inset-0 flex justify-center sm:px-8">
             <div className="flex w-full max-w-7xl lg:px-8">
               <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
