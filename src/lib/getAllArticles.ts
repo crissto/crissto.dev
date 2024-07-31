@@ -1,34 +1,36 @@
-import glob from 'fast-glob'
-import * as path from 'path'
+import glob from "fast-glob";
+import * as path from "node:path";
 
 export type Article = {
-  slug: string,
-  component: any,
-  author: string,
-  date: string,
-  title: string,
-  description: string,
-  published: boolean,
-}
+  slug: string;
+  component: React.ComponentType<{ isRssFeed: boolean }>;
+  author: string;
+  date: string;
+  title: string;
+  description: string;
+  published: boolean;
+};
 
 async function importArticle(articleFilename: string): Promise<Article> {
-  let { meta, default: component } = await import(
-    `../pages/articles/${articleFilename}`
-  )
+  const { meta, default: component } = await import(
+    `../app/articles/${articleFilename}`
+  );
   return {
-    slug: articleFilename.replace(/(\/index)?\.mdx$/, ''),
+    slug: articleFilename.replace(/(\/index)?\.mdx$/, ""),
     ...meta,
     component,
-  }
+  };
 }
 
-export async function getAllArticles() {
-  let articleFilenames = await glob(['*.mdx', '*/index.mdx'], {
-    cwd: path.join(process.cwd(), 'src/pages/articles'),
-  })
+export async function getAllArticles(): Promise<Article[]> {
+  const articleFilenames = await glob(["*.mdx", "*/index.mdx"], {
+    cwd: path.join(process.cwd(), "src/app/articles"),
+  });
 
-  let articles = await Promise.all(articleFilenames.map(importArticle))
-  let publishedArticles = articles.filter((article) => article.published)
-  
-  return publishedArticles.sort((a, z) => new Date(z.date).getMilliseconds() - new Date(a.date).getMilliseconds())
+  const articles = await Promise.all(articleFilenames.map(importArticle));
+  const publishedArticles = articles.filter((article) => article.published);
+
+  return publishedArticles.sort(
+    (a, z) => new Date(z.date).getTime() - new Date(a.date).getTime(),
+  );
 }

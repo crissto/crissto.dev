@@ -1,12 +1,12 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-import { Card } from '@/components/Card'
-import Newsletter from '@/components/Newsletter'
-import { SimpleLayout } from '@/components/SimpleLayout'
-import { formatDate } from '@/lib/formatDate'
-import { Article, getAllArticles } from '@/lib/getAllArticles'
+import { Card } from "@/components/Card";
+import Newsletter from "@/components/Newsletter";
+import { SimpleLayout } from "@/components/SimpleLayout";
+import { formatDate } from "@/lib/formatDate";
+import { type Article as TArticle, getAllArticles } from "@/lib/getAllArticles";
 
-function Article({ article }) {
+function Article({ article }: { article: Omit<TArticle, "component"> }) {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
@@ -32,14 +32,12 @@ function Article({ article }) {
         {formatDate(article.date)}
       </Card.Eyebrow>
     </article>
-  )
+  );
 }
 
-export default function ArticlesIndex({
-  articles,
-}: {
-  articles: Omit<Article, 'component'>[]
-}) {
+export default async function ArticlesIndex() {
+  const articles = await getAllArticles();
+
   return (
     <>
       <Head>
@@ -73,15 +71,5 @@ export default function ArticlesIndex({
         )}
       </SimpleLayout>
     </>
-  )
-}
-
-export async function getStaticProps() {
-  const articles = await getAllArticles()
-
-  return {
-    props: {
-      articles: articles.map(({ component, ...meta }) => meta),
-    },
-  }
+  );
 }

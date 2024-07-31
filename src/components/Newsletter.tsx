@@ -1,7 +1,9 @@
-import posthog from 'posthog-js'
-import { type FormEvent,type SVGProps, useState } from 'react'
+"use client";
 
-import { Button } from './Button'
+import posthog from "posthog-js";
+import { type FormEvent, type SVGProps, useState } from "react";
+
+import { Button } from "./Button";
 
 function MailIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -23,48 +25,48 @@ function MailIcon(props: SVGProps<SVGSVGElement>) {
         className="stroke-zinc-400 dark:stroke-zinc-500"
       />
     </svg>
-  )
+  );
 }
 
 interface FormElements extends HTMLFormControlsCollection {
-  email: HTMLInputElement
-  check: HTMLInputElement
+  email: HTMLInputElement;
+  check: HTMLInputElement;
 }
 
 interface NewsletterFormElement extends HTMLFormElement {
-  readonly elements: FormElements
+  readonly elements: FormElements;
 }
 
 export default function Newsletter() {
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (event: FormEvent<NewsletterFormElement>) => {
-    posthog.capture('newsletter-submitted')
-    event.preventDefault()
+    posthog.capture("newsletter-submitted");
+    event.preventDefault();
 
-    const form = event.currentTarget
-    const email = form.elements.email.value
-    const checkbox = Boolean(form.elements.check.value)
+    const form = event.currentTarget;
+    const email = form.elements.email.value;
+    const checkbox = Boolean(form.elements.check.value);
     if (!email || !checkbox) {
-      return
+      return;
     }
 
-    fetch('/api/mail', {
-      method: 'POST',
+    fetch("/api/mail", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ email }),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
-          alert(data.error)
+          alert(data.error);
         } else {
-          setSubmitted(true)
+          setSubmitted(true);
         }
-      })
-  }
+      });
+  };
 
   return (
     <form
@@ -103,5 +105,5 @@ export default function Newsletter() {
 
       <input name="check" type="checkbox" hidden value="0" />
     </form>
-  )
+  );
 }

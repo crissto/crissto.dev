@@ -1,30 +1,28 @@
-import Head from 'next/head'
-import type { ReactNode } from 'react'
+import Head from "next/head";
+import type { ReactNode } from "react";
 
-import { Card } from '@/components/Card'
-import { Section } from '@/components/Section'
-import { SimpleLayout } from '@/components/SimpleLayout'
+import { Card } from "@/components/Card";
+import { Section } from "@/components/Section";
+import { SimpleLayout } from "@/components/SimpleLayout";
 
 type ToolsSectionProps = {
-  children?: ReactNode
-  title: string
-}
+  children?: ReactNode;
+  title: string;
+};
 
 function ToolsSection({ children, ...props }: ToolsSectionProps) {
   return (
     <Section {...props}>
-      <ul role="list" className="space-y-16">
-        {children}
-      </ul>
+      <ul className="space-y-16">{children}</ul>
     </Section>
-  )
+  );
 }
 
 type ToolsProps = {
-  title?: string
-  href?: string
-  children?: ReactNode
-}
+  title?: string;
+  href?: string;
+  children?: ReactNode;
+};
 
 function Tool({ title, href, children }: ToolsProps) {
   return (
@@ -34,7 +32,7 @@ function Tool({ title, href, children }: ToolsProps) {
       </Card.Title>
       <Card.Description>{children}</Card.Description>
     </Card>
-  )
+  );
 }
 
 export default function Uses() {
@@ -112,5 +110,5 @@ export default function Uses() {
         </div>
       </SimpleLayout>
     </>
-  )
+  );
 }

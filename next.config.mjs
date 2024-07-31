@@ -1,17 +1,19 @@
-import rehypePrism from '@mapbox/rehype-prism'
-import nextMDX from '@next/mdx'
-import { withAxiom } from 'next-axiom'
-import remarkGfm from 'remark-gfm'
+import rehypePrism from "@mapbox/rehype-prism";
+import nextMDX from "@next/mdx";
+import { withAxiom } from "next-axiom";
+import remarkGfm from "remark-gfm";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
     scrollRestoration: true,
+    ppr: true,
+    reactCompiler: true,
   },
-}
+};
 
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
@@ -19,6 +21,6 @@ const withMDX = nextMDX({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [rehypePrism],
   },
-})
+});
 
-export default withAxiom(withMDX(nextConfig))
+export default withAxiom(withMDX(nextConfig));
