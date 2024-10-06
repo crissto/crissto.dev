@@ -1,12 +1,13 @@
-import clsx from 'clsx'
-import Image from 'next/image'
-import { SVGProps } from 'react'
+import clsx from "clsx";
+import Image from "next/image";
+import type { SVGProps } from "react";
 
-import logoBMind from '@/images/logos/bmind.webp'
-import logoContentful from '@/images/logos/contentful.png'
-import logoElixir from '@/images/logos/elixir.webp'
-import logoFirstblood from '@/images/logos/firstblood.ico'
-import logoSupersolid from '@/images/logos/supersolid.png'
+import logoEducaia from "@/images/logos/aia.svg";
+import logoBMind from "@/images/logos/bmind.webp";
+import logoContentful from "@/images/logos/contentful.png";
+import logoElixir from "@/images/logos/elixir.webp";
+import logoFirstblood from "@/images/logos/firstblood.ico";
+import logoSupersolid from "@/images/logos/supersolid.png";
 
 function BriefcaseIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -28,48 +29,52 @@ function BriefcaseIcon(props: SVGProps<SVGSVGElement>) {
         className="stroke-zinc-400 dark:stroke-zinc-500"
       />
     </svg>
-  )
+  );
 }
 
 export default function Resume() {
   let resume = [
     {
-      company: 'Contenful',
-      title: 'Software Engineer',
+      company: "Educaia",
+      title: "Co-founder & CTO",
+      logo: logoEducaia,
+      start: "2023",
+      end: "Present",
+    },
+    {
+      company: "Contenful",
+      title: "Senior Software Engineer",
       logo: logoContentful,
-      start: 'Sept 2022',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear(),
-      },
+      start: "Sept 2022",
+      end: "June 2023",
     },
     {
-      company: 'Elixir Games',
-      title: 'Senior Developer',
+      company: "Elixir Games",
+      title: "Senior Developer",
       logo: logoElixir,
-      start: '2022',
-      end: 'Sept 2022',
+      start: "2022",
+      end: "2022",
     },
     {
-      company: 'Firstblood',
-      title: 'Backend Engineer',
+      company: "Firstblood",
+      title: "Backend Engineer",
       logo: logoFirstblood,
-      year: '2021',
+      year: "2021",
     },
     {
-      company: 'Supersolid',
-      title: 'Server Developer',
+      company: "Supersolid",
+      title: "Server Developer",
       logo: logoSupersolid,
-      year: '2020',
+      year: "2020",
     },
     {
-      company: 'BMind',
-      title: 'FullStack Developer',
+      company: "BMind",
+      title: "FullStack Developer",
       logo: logoBMind,
-      start: '2017',
-      end: '2020',
+      start: "2017",
+      end: "2020",
     },
-  ]
+  ];
 
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
@@ -84,8 +89,8 @@ export default function Resume() {
               <Image
                 src={role.logo}
                 alt=""
-                className={clsx('h-8 w-8', {
-                  'rounded-full bg-white': role.logo === logoBMind,
+                className={clsx("h-8 w-8", {
+                  "rounded-full bg-white": role.logo === logoBMind,
                 })}
               />
             </div>
@@ -110,19 +115,19 @@ export default function Resume() {
                 <dd
                   className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
                   aria-label={`${role.start} until ${
-                    typeof role.end != 'string' ? role.end.label : role.end
+                    typeof role.end != "string" ? role.end.label : role.end
                   }`}
                 >
-                  <time dateTime={role.start}>{role.start}</time>{' '}
-                  <span aria-hidden="true">—</span>{' '}
+                  <time dateTime={role.start}>{role.start}</time>{" "}
+                  <span aria-hidden="true">—</span>{" "}
                   <time
                     dateTime={
-                      typeof role.end != 'string'
+                      typeof role.end != "string"
                         ? role.end.dateTime.toString()
                         : role.end
                     }
                   >
-                    {typeof role.end != 'string' ? role.end.label : role.end}
+                    {typeof role.end != "string" ? role.end.label : role.end}
                   </time>
                 </dd>
               )}
@@ -135,5 +140,5 @@ export default function Resume() {
           <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
         </Button> */}
     </div>
-  )
+  );
 }

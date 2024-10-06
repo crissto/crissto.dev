@@ -14,7 +14,10 @@ import { Suspense } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Christian Stoyanov | Software Developer & Product Builder",
+  title: {
+    default: "Christian Stoyanov",
+    template: "%s | Software Developer & Product Builder",
+  },
   description:
     "Experienced software developer and product builder specializing in web technologies. Explore my projects, articles, and insights on software development and product management.",
   keywords: [
@@ -24,12 +27,14 @@ export const metadata: Metadata = {
     "JavaScript",
     "React",
     "Node.js",
+    "Madrid",
+    "Contentful",
   ],
   authors: [{ name: "Christian Stoyanov", url: "https://crissto.dev" }],
   openGraph: {
     title: "Christian Stoyanov | Software Developer & Product Builder",
     description:
-      "Experienced software developer and product builder specializing in web technologies. Explore my projects, articles, and insights on software development and product management.",
+      "Experienced software developer and product builder specializing in web technologies.",
     url: "https://crissto.dev",
     siteName: "Christian Stoyanov's Portfolio",
     images: [
@@ -37,7 +42,7 @@ export const metadata: Metadata = {
         url: "https://crissto.dev/me.png",
         width: 1200,
         height: 630,
-        alt: "Christian Stoyanov",
+        alt: "Portrait of Christian Stoyanov",
       },
     ],
     type: "website",
@@ -49,16 +54,21 @@ export const metadata: Metadata = {
     creator: "@crissto39",
     title: "Christian Stoyanov | Software Developer & Product Builder",
     description:
-      "Experienced software developer and product builder specializing in web technologies. Explore my projects, articles, and insights on software development and product management.",
+      "Experienced software developer and product builder specializing in web technologies.",
     images: ["https://crissto.dev/me.png"],
   },
   alternates: {
+    canonical: "https://crissto.dev/",
     types: {
       "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL}/rss/feed.xml`,
       "application/feed+json": `${process.env.NEXT_PUBLIC_SITE_URL}/rss/feed.json`,
     },
   },
-  robots: "index, follow",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+  },
   metadataBase: new URL("https://crissto.dev"),
 };
 
@@ -76,6 +86,30 @@ export default function RootLayout({
       <html lang="en" className="h-full antialiased">
         <head>
           <Script src="/scripts/modeScript.js" strategy="beforeInteractive" />
+
+          {/* Canonical Link */}
+          <link rel="canonical" href="https://crissto.dev/" />
+
+          {/* Favicons */}
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <link rel="manifest" href="/site.webmanifest" />
+
+          {/* Structured Data */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              url: "https://crissto.dev/",
+              name: "Home - Christian Stoyanov | Software Developer & Product Builder",
+              alternateName: "Christian Stoyanov Portfolio",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://crissto.dev/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            })}
+          </script>
         </head>
         <body
           className={`flex h-full flex-col bg-zinc-50 dark:bg-black ${inter.className}`}
@@ -86,7 +120,7 @@ export default function RootLayout({
           <SpeedInsights />
           <div className="fixed inset-0 flex justify-center sm:px-8">
             <div className="flex w-full max-w-7xl lg:px-8">
-              <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
+              <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-300/20" />
             </div>
           </div>
           <div className="relative">

@@ -10,7 +10,7 @@ import {
 } from "@/components/SocialIcons";
 import { formatDate } from "@/lib/formatDate";
 import { getAllArticles } from "@/lib/getAllArticles";
-import type { Metadata } from "next";
+import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 function Article({ article }) {
@@ -29,22 +29,19 @@ function Article({ article }) {
 }
 
 type SocialLinkProps = {
-  icon?: any;
+  icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   href: string;
 };
 
 function SocialLink({ icon: Icon, ...props }: SocialLinkProps) {
   return (
     <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+      {Icon && (
+        <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+      )}
     </Link>
   );
 }
-
-export const metadata: Metadata = {
-  title: "Home - Christian Stoyanov",
-  description: "Software developer and product builder",
-};
 
 export default async function Home() {
   const articles = (await getAllArticles())
@@ -55,28 +52,58 @@ export default async function Home() {
     <>
       <Container className="mt-9">
         <div className="max-w-6xl">
-          <div className="flex space-x-6 align-middle">
-            <div className="flex flex-col justify-center">
-              <Avatar large className="block h-32 w-32 origin-left" />
+          <div className="flex flex-col sm:flex-row sm:space-x-6 sm:align-middle">
+            <div className="flex justify-center sm:justify-start mb-4 sm:mb-0">
+              <Avatar
+                large
+                className="block h-24 w-24 sm:h-32 sm:w-32 origin-center sm:origin-left"
+              />
             </div>
-            <div>
-              <h1 className="max-w-lg text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-                Software developer and product builder
+            <div className="text-center sm:text-left mt-6 lg:mt-0">
+              <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 lg:text-5xl">
+                Product builder, software developer
               </h1>
             </div>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-5 space-x-0 lg:space-x-8">
-            <div className="col-span-3">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-4 lg:mt-0">
+            <div className="col-span-1 lg:col-span-3">
               <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
                 Hey! 👋{" "}
               </p>
               <p className="mt-1 text-base text-zinc-600 dark:text-zinc-400">
-                I’m Christian, a software developer and entrepreneur based in
-                Berlin. I current work at Contenful trying to make developers
-                life easier. Also love to hack on my own projects and build
-                stuff.
+                I'm Christian, a software developer and entrepreneur based in
+                Madrid. With a passion for innovation and problem-solving, I've
+                transitioned from coding to building impactful products.
               </p>
-              <div className="mt-6 flex gap-6">
+              <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+                Currently, I'm spearheading the technical development at
+                Educaia, a cutting-edge startup leveraging AI to revolutionize
+                public service exam preparation. Our platform is designed to
+                make the journey easier and more efficient for aspiring public
+                servants.
+              </p>
+              <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+                Beyond Educaia, I collaborate with various companies and
+                startups, offering expertise in AI integration and product
+                development. My goal is to help businesses harness the power of
+                technology to solve complex challenges and drive growth.
+              </p>
+              <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+                If you're looking for assistance with AI implementation, product
+                strategy, or technical leadership, I'd be glad to help. Feel
+                free to reach out or{" "}
+                <a
+                  href="https://cal.com/crissto/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-teal-500 hover:text-teal-600 hover:underline inline-flex items-center gap-1"
+                >
+                  <ExternalLinkIcon className="w-4 h-4 -mt-0.5" />
+                  schedule a call
+                </a>{" "}
+                to discuss how we can work together to bring your ideas to life.
+              </p>
+              <div className="mt-6 flex justify-center sm:justify-start gap-6">
                 <SocialLink
                   href="https://twitter.com/crissto39"
                   aria-label="Follow on Twitter"
@@ -94,7 +121,7 @@ export default async function Home() {
                 />
               </div>
             </div>
-            <div className="col-span-1 lg:col-span-2 mt-12 lg:mt-0">
+            <div className="col-span-1 lg:col-span-2 mt-8 lg:mt-0">
               <Resume />
             </div>
           </div>
